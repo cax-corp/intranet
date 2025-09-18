@@ -50,37 +50,12 @@
       display: none;
     }
 
-    /* Intranet layout */
-    #content {
-      display: none;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-    header {
-      background: #1e293b;
-      padding: 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-    }
-    header img {
-      height: 40px;
-    }
-    header h1 {
-      font-size: 1.2rem;
-      margin: 0;
-      flex: 1;
-      text-align: center;
-    }
-
+    /* Intranet layout (sera injecté dynamiquement) */
     .dashboard {
       flex: 1;
       display: flex;
-      min-height: 0; /* fix overflow */
+      min-height: 0;
     }
-
     nav {
       width: 200px;
       background: #0f172a;
@@ -105,8 +80,25 @@
       padding: 2rem;
       overflow-y: auto;
     }
+    header {
+      background: #1e293b;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    header img {
+      height: 40px;
+    }
+    header h1 {
+      font-size: 1.2rem;
+      margin: 0;
+      flex: 1;
+      text-align: center;
+    }
 
-    /* Responsive: écran <= 768px (tablette, mobile) */
+    /* Responsive */
     @media (max-width: 768px) {
       .dashboard {
         flex-direction: column;
@@ -144,36 +136,33 @@
     <p id="error">Wrong password</p>
   </div>
 
-  <!-- Intranet layout -->
-  <div id="content">
-    <header>
-      <img src="assets/logo.png" alt="CAX Logo"> <!-- Logo hébergé dans /assets -->
-      <h1>CAX Intranet Dashboard</h1>
-    </header>
-    <div class="dashboard">
-      <nav>
-        <ul>
-          <li><a href="#">📊 Dashboard</a></li>
-          <li><a href="#">🔑 License Checker</a></li>
-          <li><a href="#">📂 Resources</a></li>
-          <li><a href="#">⚙️ Tools</a></li>
-        </ul>
-      </nav>
-      <main>
-        <h2>Welcome, Monsieur</h2>
-        <p>This is your private dashboard.</p>
-      </main>
-    </div>
-  </div>
-
   <script>
     const PASSWORD = "admin123"; // <-- Changez ici
 
     function checkPassword() {
       const input = document.getElementById("password").value;
       if (input === PASSWORD) {
-        document.getElementById("login").style.display = "none";
-        document.getElementById("content").style.display = "flex";
+        // Supprime l'écran de login
+        document.body.innerHTML = `
+          <header>
+            <img src="assets/logo.png" alt="CAX Logo">
+            <h1>CAX Intranet Dashboard</h1>
+          </header>
+          <div class="dashboard">
+            <nav>
+              <ul>
+                <li><a href="#">📊 Dashboard</a></li>
+                <li><a href="#">🔑 License Checker</a></li>
+                <li><a href="#">📂 Resources</a></li>
+                <li><a href="#">⚙️ Tools</a></li>
+              </ul>
+            </nav>
+            <main>
+              <h2>Welcome, Monsieur</h2>
+              <p>This is your private dashboard.</p>
+            </main>
+          </div>
+        `;
       } else {
         document.getElementById("error").style.display = "block";
       }
