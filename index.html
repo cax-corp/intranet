@@ -1,172 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CAX Intranet</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0f172a;
-      color: #f8fafc;
-    }
-
-    /* Login full page */
-    #login {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background: #1e293b;
-      flex-direction: column;
-      padding: 1rem;
-      text-align: center;
-    }
-    #login input, #login button {
-      margin-top: 1rem;
-      padding: 10px;
-      border: none;
-      border-radius: 8px;
-      font-size: 1rem;
-    }
-    #login input {
-      width: 100%;
-      max-width: 250px;
-    }
-    #login button {
-      background: #2563eb;
-      color: #fff;
-      cursor: pointer;
-      width: 100%;
-      max-width: 250px;
-    }
-    #login button:hover {
-      background: #1d4ed8;
-    }
-    #error {
-      margin-top: 0.5rem;
-      color: #f87171;
-      display: none;
-    }
-
-    /* Intranet layout (sera injecté dynamiquement) */
-    .dashboard {
-      flex: 1;
-      display: flex;
-      min-height: 0;
-    }
-    nav {
-      width: 200px;
-      background: #0f172a;
-      padding: 1rem;
-      box-sizing: border-box;
-    }
-    nav ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    nav li {
-      margin: 1rem 0;
-    }
-    nav a {
-      color: #f8fafc;
-      text-decoration: none;
-    }
-    main {
-      flex: 1;
-      background: #111827;
-      padding: 2rem;
-      overflow-y: auto;
-    }
-    header {
-      background: #1e293b;
-      padding: 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-    }
-    header img {
-      height: 40px;
-    }
-    header h1 {
-      font-size: 1.2rem;
-      margin: 0;
-      flex: 1;
-      text-align: center;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .dashboard {
-        flex-direction: column;
-      }
-      nav {
-        width: 100%;
-        display: flex;
-        justify-content: space-around;
-        padding: 0.5rem;
-      }
-      nav ul {
-        display: flex;
-        width: 100%;
-        justify-content: space-around;
-      }
-      nav li {
-        margin: 0;
-      }
-      main {
-        padding: 1rem;
-      }
-      header h1 {
-        font-size: 1rem;
-      }
-    }
-  </style>
+  <title>Intranet CAX Corporation</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-  <!-- Login screen -->
-  <div id="login">
-    <h2>🔒 Enter Password</h2>
-    <input type="password" id="password" placeholder="Password">
-    <button onclick="checkPassword()">Login</button>
-    <p id="error">Wrong password</p>
+  <!-- Écran mot de passe -->
+  <div id="login-screen">
+    <div class="login-box">
+      <h2>Accès intranet</h2>
+      <input type="password" id="password" placeholder="Mot de passe">
+      <button onclick="checkPassword()">Entrer</button>
+      <p id="error-message"></p>
+    </div>
   </div>
 
-  <script>
-    const PASSWORD = "admin123"; // <-- Changez ici
+  <!-- Contenu intranet -->
+  <div id="intranet-content" class="hidden">
+    <header>
+      <img src="unnamed.png" alt="Logo CAX" class="logo">
+      <h1>Intranet CAX Corporation</h1>
+    </header>
+    <main>
+      <section>
+        <h2>Bienvenue</h2>
+        <p>Ceci est votre espace privé de travail.</p>
+      </section>
+      <section>
+        <h2>Outils</h2>
+        <ul>
+          <li><a href="#">Licence Checker</a></li>
+          <li><a href="#">Documents internes</a></li>
+          <li><a href="#">Ressources utiles</a></li>
+        </ul>
+      </section>
+    </main>
+    <footer>
+      <p>© 2025 CAX Corporation</p>
+    </footer>
+  </div>
 
-    function checkPassword() {
-      const input = document.getElementById("password").value;
-      if (input === PASSWORD) {
-        // Supprime l'écran de login
-        document.body.innerHTML = `
-          <header>
-            <img src="assets/logo.png" alt="CAX Logo">
-            <h1>CAX Intranet Dashboard</h1>
-          </header>
-          <div class="dashboard">
-            <nav>
-              <ul>
-                <li><a href="#">📊 Dashboard</a></li>
-                <li><a href="#">🔑 License Checker</a></li>
-                <li><a href="#">📂 Resources</a></li>
-                <li><a href="#">⚙️ Tools</a></li>
-              </ul>
-            </nav>
-            <main>
-              <h2>Welcome, Monsieur</h2>
-              <p>This is your private dashboard.</p>
-            </main>
-          </div>
-        `;
-      } else {
-        document.getElementById("error").style.display = "block";
-      }
-    }
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
